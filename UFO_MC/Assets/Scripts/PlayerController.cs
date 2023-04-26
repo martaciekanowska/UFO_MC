@@ -1,10 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
-
+    public Text scoreText;
+    public Text winText;
     Rigidbody2D rb2d;
     private int count = 0;
     // Start is called before the first frame update
@@ -28,12 +31,25 @@ public class PlayerController : MonoBehaviour
         {
             count++;
             Destroy(collision.gameObject);
+            UpdateScoreText();
         }
     }
 
     // Update is called once per frame
-    void Update()
+    void UpdateScoreText()
     {
-        
+        scoreText.text = "Wynik: " + count;
+        if (count == 3)
+        {
+            winText.gameObject.SetActive(true);
+            scoreText.gameObject.SetActive(false);
+            StartCoroutine(WaitforFunction());
+            SceneManager.LoadScene("Level02");
+        }
+    }
+
+    IEnumerator WaitforFunction()
+    {
+        yield return new WaitForSeconds(3);
     }
 }
