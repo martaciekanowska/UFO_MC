@@ -25,6 +25,12 @@ public class PlayerController : MonoBehaviour
 
     }
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        AudioManager.instance.PlaySFX("Bounce");
+
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("PickUp"))
@@ -32,6 +38,7 @@ public class PlayerController : MonoBehaviour
             count++;
             Destroy(collision.gameObject);
             UpdateScoreText();
+            AudioManager.instance.PlaySFX("Coin"); 
         }
     }
 
@@ -43,7 +50,9 @@ public class PlayerController : MonoBehaviour
         {
             winText.gameObject.SetActive(true);
             scoreText.gameObject.SetActive(false);
+            AudioManager.instance.PlaySFX("Win");
             StartCoroutine(StopTime());
+            
         }
     }
 
