@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
     public Text scoreText;
     public Text winText;
     Rigidbody2D rb2d;
+    public float speed = 0;
     private int count = 0;
     // Start is called before the first frame update
     void Start()
@@ -21,7 +22,7 @@ public class PlayerController : MonoBehaviour
         float MoveHorizontal = Input.GetAxis("Horizontal");
         float MoveVertical = Input.GetAxis("Vertical");
         Vector2 movement = new Vector2(MoveHorizontal, MoveVertical);
-        rb2d.AddForce(movement * 15);
+        rb2d.AddForce(movement * speed);
 
     }
 
